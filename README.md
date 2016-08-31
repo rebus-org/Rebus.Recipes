@@ -1,4 +1,4 @@
-# Rebus.TODO
+# Rebus.Recipes
 
 Provides a nifty extensions and helpers for [Rebus](https://github.com/rebus-org/Rebus).
 
