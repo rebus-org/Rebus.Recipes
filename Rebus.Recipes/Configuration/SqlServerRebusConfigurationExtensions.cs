@@ -1,8 +1,8 @@
 using Rebus.Config;
 using Rebus.DataBus;
-using Rebus.DataBus.SqlServer;
-using Rebus.Persistence.SqlServer;
-using Rebus.Transport.SqlServer;
+using Rebus.SqlServer;
+using Rebus.SqlServer.DataBus;
+using Rebus.SqlServer.Transport;
 
 namespace Rebus.Recipes.Configuration
 {

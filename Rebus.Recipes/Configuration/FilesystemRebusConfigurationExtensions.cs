@@ -30,7 +30,7 @@ namespace Rebus.Recipes.Configuration
                 .Transport(t => t.UseFileSystem(transport, queueName))
                 .Sagas(t => t.UseFilesystem(sagas))
                 .Subscriptions(t => t.UseJsonFile(subscriptions))
-                .Timeouts(t => t.UseFilesystem(timeouts))
+                .Timeouts(t => t.UseFileSystem(timeouts))
                 .Options(o =>
                 {
                     o.EnableDataBus().StoreInFileSystem(dataBus);
@@ -51,7 +51,7 @@ namespace Rebus.Recipes.Configuration
             return configurer
                 .Transport(t => t.UseFileSystemAsOneWayClient(transport))
                 .Subscriptions(t => t.UseJsonFile(subscriptions))
-                .Timeouts(t => t.UseFilesystem(timeouts))
+                .Timeouts(t => t.UseFileSystem(timeouts))
                 .Options(o =>
                 {
                     o.EnableDataBus().StoreInFileSystem(dataBus);
