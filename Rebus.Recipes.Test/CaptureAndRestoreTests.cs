@@ -6,7 +6,6 @@ using Rebus.Messages;
 using Rebus.Pipeline;
 using Rebus.Pipeline.Send;
 using Rebus.Recipes.Identity;
-using Rebus.Transport;
 
 namespace Rebus.Recipes.Test
 {
@@ -34,7 +33,7 @@ namespace Rebus.Recipes.Test
         {
             var step = new CapturePrincipalInOutgoingMessage(new DummySerializer());
             var instance = new Message(new Dictionary<string, string>(), new object());
-            var context = new OutgoingStepContext(instance, new DefaultTransactionContext(),
+            var context = new OutgoingStepContext(instance, new FakeTransactionContext(),
                 new DestinationAddresses(new[] { "Larry" }));
             
             context.Save(instance);
@@ -47,7 +46,7 @@ namespace Rebus.Recipes.Test
         {
             var step = new RestorePrincipalFromIncomingMessage(new DummySerializer());
             var instance = new Message(new Dictionary<string, string>(), new object());
-            var context = new IncomingStepContext(new TransportMessage(new Dictionary<string, string>(), new byte[0] ), new DefaultTransactionContext() );
+            var context = new IncomingStepContext(new TransportMessage(new Dictionary<string, string>(), new byte[0] ), new FakeTransactionContext());
             instance.Headers[CapturePrincipalInOutgoingMessage.PrincipalCaptureKey] = "Larry";
             context.Save(instance);
             await step.Process(context, async () =>
@@ -60,7 +59,7 @@ namespace Rebus.Recipes.Test
         {
             var step = new RestorePrincipalFromIncomingMessage(new DummySerializer());
             var instance = new Message(new Dictionary<string, string>(), new object());
-            var context = new IncomingStepContext(new TransportMessage(new Dictionary<string, string>(), new byte[0]), new DefaultTransactionContext());
+            var context = new IncomingStepContext(new TransportMessage(new Dictionary<string, string>(), new byte[0]), new FakeTransactionContext());
             instance.Headers[CapturePrincipalInOutgoingMessage.PrincipalCaptureKey] = "Larry";
             context.Save(instance);
             await step.Process(context, async () =>
